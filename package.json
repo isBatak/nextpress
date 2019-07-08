@@ -1,0 +1,10 @@
+{
+  "name": "nextpress",
+  "version": "1.0.0",
+  "description": "\"Headless Wordpress and Next.js boilerplate\"",
+  "main": "index.js",
+  "author": "Ivica Batinic",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["backend", "frontend", "common"]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "\"Headles wordpress shared components\"",
+  "main": "index.js",
+  "license": "MIT"
+}
