@@ -1,7 +1,8 @@
-import * as React from 'react'
-import Link from 'next/link'
-import Layout from '../components/Layout'
-import { NextPage } from 'next'
+import * as React from 'react';
+import Link from 'next/link';
+import Layout from '../components/Layout';
+import { NextPage } from 'next';
+import { ImageText } from 'common';
 
 const IndexPage: NextPage = () => {
   return (
@@ -12,8 +13,9 @@ const IndexPage: NextPage = () => {
           <a>About</a>
         </Link>
       </p>
+      <ImageText />
     </Layout>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
