@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { Global, css } from '@emotion/core';
-// import emotionNormalize from 'emotion-normalize'
+import emotionNormalize from 'emotion-normalize';
 
 type Props = {
   title?: string;
@@ -37,6 +37,7 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
     </footer>
     <Global
       styles={css`
+        ${emotionNormalize}
         html,
         body {
           padding: 0;
