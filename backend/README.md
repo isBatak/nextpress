@@ -1,68 +1,129 @@
-# [Bedrock](https://roots.io/bedrock/)
-[![Packagist](https://img.shields.io/packagist/v/roots/bedrock.svg?style=flat-square)](https://packagist.org/packages/roots/bedrock)
-[![Build Status](https://img.shields.io/travis/roots/bedrock.svg?style=flat-square)](https://travis-ci.org/roots/bedrock)
+# Docker Compose and WordPress
 
-Bedrock is a modern WordPress stack that helps you get started with the best development tools and project structure.
+[![Build Status](https://travis-ci.org/urre/wordpress-nginx-docker-compose.svg?branch=master)](https://travis-ci.org/urre/wordpress-nginx-docker-compose)
 
-Much of the philosophy behind Bedrock is inspired by the [Twelve-Factor App](http://12factor.net/) methodology including the [WordPress specific version](https://roots.io/twelve-factor-wordpress/).
+Use WordPress with Docker using [Docker compose](https://docs.docker.com/compose/)
 
-## Features
+- `Dockerfile` for extending a base image and install wp-cli + Using a custom [Docker image](https://github.com/urre/wordpress-nginx-docker-compose-image) with [automated build on Docker Hub](https://cloud.docker.com/repository/docker/urre/wordpress-nginx-docker-compose-image)
+- Local domain ex `myapp.local`
+- Custom nginx config in `./nginx`
+- Custom `php.ini` config in `./config`
+- Volumes for `nginx`, `wordpress` and `mariadb`
+- WordPress using [Bedrock](https://roots.io/bedrock/) - modern development tools, easier configuration, and an improved folder structure
+- CLI scripts for creating a self signed SSL certificate for using https
+- CLI script for trusting certs in macOS System Keychain
+- CLI script for setting up an entry in your host file
 
-* Better folder structure
-* Dependency management with [Composer](https://getcomposer.org)
-* Easy WordPress configuration with environment specific files
-* Environment variables with [Dotenv](https://github.com/vlucas/phpdotenv)
-* Autoloader for mu-plugins (use regular plugins as mu-plugins)
-* Enhanced security (separated web root and secure passwords with [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
+## Setup
 
-## Requirements
+### Requirements
 
-* PHP >= 7.1
-* Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+Install [Docker](https://www.docker.com/get-started)
 
-## Installation
+### Create SSL cert
 
-1. Create a new project:
-    ```sh
-    $ composer create-project roots/bedrock
-    ```
-2. Update environment variables in the `.env` file:
-  * Database variables
-    * `DB_NAME` - Database name
-    * `DB_USER` - Database user
-    * `DB_PASSWORD` - Database password
-    * `DB_HOST` - Database host
-    * Optionally, you can define `DATABASE_URL` for using a DSN instead of using the variables above (e.g. `mysql://user:password@127.0.0.1:3306/db_name`)
-  * `WP_ENV` - Set to environment (`development`, `staging`, `production`)
-  * `WP_HOME` - Full URL to WordPress home (https://example.com)
-  * `WP_SITEURL` - Full URL to WordPress including subdirectory (https://example.com/wp)
-  * `AUTH_KEY`, `SECURE_AUTH_KEY`, `LOGGED_IN_KEY`, `NONCE_KEY`, `AUTH_SALT`, `SECURE_AUTH_SALT`, `LOGGED_IN_SALT`, `NONCE_SALT`
-    * Generate with [wp-cli-dotenv-command](https://github.com/aaemnnosttv/wp-cli-dotenv-command)
-    * Generate with [our WordPress salts generator](https://roots.io/salts.html)
-3. Add theme(s) in `web/app/themes/` as you would for a normal WordPress site
-4. Set the document root on your webserver to Bedrock's `web` folder: `/path/to/site/web/`
-5. Access WordPress admin at `https://example.com/wp/wp-admin/`
+```shell
+cd cli && ./create-cert.sh
+```
 
-## Documentation
+> Edit the script to your your custom domain, this example uses myapp.local
 
-Bedrock documentation is available at [https://roots.io/bedrock/docs/](https://roots.io/bedrock/docs/).
+### Trust cert in macOS Keychain. (Chrome and Safari will trust the certs, for Firefox: add them in preferences)
 
-## Contributing
+```shell
+cd cli && ./trust-cert.sh
+```
 
-Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
+> Edit the script to your your custom domain, this example uses myapp.local
 
-## Bedrock sponsors
+### Setup vhost in /etc/hosts
 
-Help support our open-source development efforts by [becoming a patron](https://www.patreon.com/rootsdev).
+```shell
+cd cli && ./setup-hosts-file.sh
+```
 
-<a href="https://kinsta.com/?kaid=OFDHAJIXUDIV"><img src="https://cdn.roots.io/app/uploads/kinsta.svg" alt="Kinsta" width="200" height="150"></a> <a href="https://k-m.com/"><img src="https://cdn.roots.io/app/uploads/km-digital.svg" alt="KM Digital" width="200" height="150"></a> <a href="https://www.itineris.co.uk/"><img src="https://cdn.roots.io/app/uploads/itineris.svg" alt="itineris" width="200" height="150"></a>
+> Follow the instructions. For example use `myapp.local`
 
-## Community
+### Setup ENV
 
-Keep track of development and community news.
+```shell
+cd src
+cp .env.example .env
+```
 
-* Participate on the [Roots Discourse](https://discourse.roots.io/)
-* Follow [@rootswp on Twitter](https://twitter.com/rootswp)
-* Read and subscribe to the [Roots Blog](https://roots.io/blog/)
-* Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
-* Listen to the [Roots Radio podcast](https://roots.io/podcast/)
+Use the following database settings:
+
+```yml
+DB_HOST=mysql:3306
+DB_NAME=myapp
+DB_USER=root
+DB_PASSWORD=password
+```
+
+## Install WordPress and Composer dependencies
+
+```shell
+cd src
+composer install
+```
+
+> You can also use composer like this: `docker-compose run composer update`
+
+## Run
+
+```shell
+docker-compose up -d
+```
+
+🚀 Open up [https://myapp.local](https://myapp.local)
+
+### Notes:
+
+> When making changes to the Dockerfile : Use `docker-compose up -d --force-recreate --build`.
+
+### Tools
+
+#### wp-cli
+
+```
+docker exec -it myapp-wordpress bash
+wp search-replace https://olddomain.com https://newdomain.com --allow-root
+```
+
+#### Useful Docker Commands
+
+Login to the docker container
+
+```shell
+docker exec -it myapp-wordpress bash
+```
+
+Stop
+
+```shell
+docker-compose stop
+```
+
+Down (stop and remove)
+
+```shell
+docker-compose down
+```
+
+Cleanup
+
+```shell
+docker-compose rm -v
+```
+
+Recreate
+
+```shell
+docker-compose up -d --force-recreate
+```
+
+Rebuild docker container when Dockerfile has changed
+
+```shell
+docker-compose up -d --force-recreate --build
+```

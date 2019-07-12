@@ -1,0 +1,52 @@
+version: '3.6'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: myapp-nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./src:/var/www/html:rw,cached
+      - ./certs:/etc/certs
+    depends_on:
+      - wordpress
+    restart: always
+
+  mysql:
+    image: mariadb
+    container_name: myapp-mysql
+    volumes:
+      - './data/db:/var/lib/mysql:delegated'
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=myapp
+    restart: always
+    ports:
+      - '3306:3306'
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: myapp-wordpress
+    volumes:
+      - ./src:/var/www/html:rw,cached
+      - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
+    environment:
+      - WORDPRESS_DB_NAME=myapp
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_PASSWORD=password
+    depends_on:
+      - mysql
+    restart: always
+
+  composer:
+    image: composer/composer
+    container_name: myapp-composer
+    working_dir: /var/www/html
+    restart: 'no'
+    volumes:
+      - ./src:/var/www/html:rw,cached

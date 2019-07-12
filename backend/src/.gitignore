@@ -1,0 +1,43 @@
+# Application
+src/web/app/plugins/*
+!src/web/app/plugins/.gitkeep
+src/web/app/mu-plugins/*/
+src/web/app/upgrade
+src/web/app/uploads/*
+!src/web/app/uploads/.gitkeep
+
+# WordPress
+src/web/wp
+src/web/.htaccess
+
+# WP-CLI
+db-sync
+sql-dump-*.sql
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Vendor (e.g. Composer)
+src/vendor/*
+!src/vendor/.gitkeep
+
+# Database volume
+data
+
+# Node Package Manager
+node_modules
+
+# Certs
+certs/
+
+# Logs
+logs/
+
+# Vagrant
+bin
+.vagrant
+
+# Custom
+.DS_Store
