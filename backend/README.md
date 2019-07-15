@@ -75,7 +75,7 @@ composer install
 docker-compose up -d
 ```
 
-🚀 Open up [https://myapp.local](https://myapp.local)
+🚀 Open up [https://nextpress.local](https://nextpress.local)
 
 ### Notes:
 
