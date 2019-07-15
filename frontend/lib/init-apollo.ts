@@ -10,7 +10,7 @@ function create(initialState: any) {
     ssrMode: !isBrowser,
     link: new HttpLink({
       uri: 'https://nextpress.local/graphql',
-      credentials: 'same-origin',
+      // credentials: 'same-origin',
       fetch: !isBrowser && (fetch as any),
     }),
     cache: new InMemoryCache().restore(initialState || {}),
