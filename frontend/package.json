@@ -2,9 +2,9 @@
   "name": "frontend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
+    "dev": "NODE_EXTRA_CA_CERTS=../backend/certs/nextpress.local.crt next",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_EXTRA_CA_CERTS=../backend/certs/nextpress.local.crt next start",
     "type-check": "tsc"
   },
   "dependencies": {
