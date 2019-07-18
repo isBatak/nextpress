@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Nextpress
+ * Plugin Name: Nextpress-old
  * Author: Ivica
  * Version: 1.0.0
  */
