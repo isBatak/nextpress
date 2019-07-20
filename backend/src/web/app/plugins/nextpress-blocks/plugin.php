@@ -1,15 +1,13 @@
 <?php
 /**
- * Plugin Name: nextpress-blocks
+ * Plugin Name: Nextpress Blocks
  * Plugin URI:
- * Description: nextpress-blocks
+ * Description: Nextpress blocks
  * Author:
  * Author URI:
  * Version: 1.0.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
- *
- * @package CGB
  */
 
 // Exit if accessed directly.

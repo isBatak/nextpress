@@ -87,7 +87,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx|mjs|ts|tsx)$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -100,12 +100,12 @@ module.exports = {
       },
       {
         test: /style\.s?css$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: blocksCSSPlugin.extract(extractConfig),
       },
       {
         test: /editor\.s?css$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: editBlocksCSSPlugin.extract(extractConfig),
       },
     ],

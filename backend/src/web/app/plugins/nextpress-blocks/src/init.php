@@ -63,16 +63,18 @@ function nextpress_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'nextpress/block-nextpress-blocks', array(
+		'nextpress/nextpress-blocks', array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'nextpress-style-css',
+			// 'style'         => 'nextpress-style-css',
 			// Enqueue blocks.build.js in the editor only.
 			'editor_script' => 'nextpress-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'nextpress-block-editor-css',
+			// 'editor_style'  => 'nextpress-block-editor-css',
 		)
 	);
 }
 
 // Hook: Block assets.
-add_action( 'init', 'nextpress_block_assets' );
+// add_action( 'init', 'nextpress_block_assets' );
+
+add_action( 'enqueue_block_editor_assets', 'nextpress_block_assets' );

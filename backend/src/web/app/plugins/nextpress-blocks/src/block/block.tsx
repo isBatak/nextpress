@@ -23,7 +23,7 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
  */
 registerBlockType('nextpress/block-example', {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __('example'), // Block title.
+  title: __('Example'), // Block title.
   icon: 'dashicons-admin-users', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [__('nextpress-blocks — Example'), __('Example')],
@@ -37,7 +37,7 @@ registerBlockType('nextpress/block-example', {
    * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
    */
   edit: function() {
-    return <div>test</div>;
+    return <div>test 2</div>;
   },
 
   /**
@@ -48,21 +48,7 @@ registerBlockType('nextpress/block-example', {
    *
    * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
    */
-  // save: function(props) {
-  //   return (
-  //     <div>
-  //       <p>— Hello from the frontend.</p>
-  //       <p>
-  //         CGB BLOCK: <code>nextpress-blocks</code> is a new Gutenberg block.
-  //       </p>
-  //       <p>
-  //         It was created via{' '}
-  //         <code>
-  //           <a href="https://github.com/ahmadawais/create-guten-block">create-guten-block</a>
-  //         </code>
-  //         .
-  //       </p>
-  //     </div>
-  //   );
-  // },
+  save: function() {
+    return <div>test 2</div>;
+  },
 });
