@@ -1,1 +1,1 @@
-export { ImageText } from './components/ImageText';
+export { SnapCarousel } from './components/SnapCarousel';

@@ -3,5 +3,9 @@
   "version": "1.0.0",
   "description": "\"Headles wordpress shared components\"",
   "main": "index.ts",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/primitives": "^10.0.14",
+    "react-primitives": "^0.8.0"
+  }
 }

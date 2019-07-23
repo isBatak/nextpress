@@ -16,6 +16,8 @@ interface WPBlockSettings {
    */
   category: string;
   keywords: Array<string>;
+  attributes: object;
+  supports: object;
 
   /**
    * The edit function describes the structure of your block in the context of the editor.
