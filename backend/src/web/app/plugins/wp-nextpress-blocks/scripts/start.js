@@ -48,7 +48,7 @@ if (major < 8) {
   process.exit(1);
 }
 
-clearConsole();
+// clearConsole();
 
 // Init the spinner.
 const spinner = new ora({ text: '' });
@@ -60,7 +60,7 @@ async function build(webpackConfig) {
 
   // Run the compiler.
   compiler.watch({}, (err, stats) => {
-    clearConsole();
+    // clearConsole();
 
     if (err) {
       return console.log(err);
@@ -78,7 +78,7 @@ async function build(webpackConfig) {
       }
 
       // Clear success messages.
-      clearConsole();
+      // clearConsole();
 
       // Formatted errors.
       console.log('\n❌ ', chalk.black.bgRed(' Failed to compile. \n'));

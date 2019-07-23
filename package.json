@@ -6,5 +6,10 @@
   "author": "Ivica Batinic",
   "license": "MIT",
   "private": true,
-  "workspaces": ["backend", "frontend", "common"]
+  "workspaces": [
+    "backend/src/web/app/plugins/wp-nextpress-blocks",
+    "frontend",
+    "common",
+    "native"
+  ]
 }

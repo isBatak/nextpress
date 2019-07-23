@@ -21,11 +21,11 @@
  */
 
 const paths = require('./paths');
-const webpack = require('webpack');
 const externals = require('./externals');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const transpileModules = require('./transpile-modules');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP === 'true';
@@ -88,11 +88,15 @@ module.exports = {
   },
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   devtool: shouldUseSourceMap ? 'source-map' : false,
+  resolve: {
+    symlinks: false,
+    extensions: ['.wasm', '.mjs', '.js', '.json', '.ts', '.tsx'],
+  },
   module: {
     rules: [
       {
         test: /\.(js|jsx|mjs|ts|tsx)$/,
-        exclude: /node_modules/,
+        exclude: transpileModules.generateExcludes(['@nextpress/common']),
         use: {
           loader: 'babel-loader',
           options: {

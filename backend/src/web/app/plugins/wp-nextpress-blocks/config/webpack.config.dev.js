@@ -22,6 +22,7 @@
 
 const paths = require('./paths');
 const externals = require('./externals');
+const transpileModules = require('./transpile-modules');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -83,11 +84,15 @@ module.exports = {
   },
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   devtool: 'cheap-eval-source-map',
+  resolve: {
+    symlinks: false,
+    extensions: ['.wasm', '.mjs', '.js', '.json', '.ts', '.tsx'],
+  },
   module: {
     rules: [
       {
         test: /\.(js|jsx|mjs|ts|tsx)$/,
-        exclude: /node_modules/,
+        exclude: transpileModules.generateExcludes(['@nextpress/common']),
         use: {
           loader: 'babel-loader',
           options: {

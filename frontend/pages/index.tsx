@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Layout from '../components/Layout';
 import { NextPage } from 'next';
-import { ImageText } from 'common';
+import { ImageText } from '@nextpress/common';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import Layout from '../components/Layout';
 
 const homeQuery = gql`
   query GET_PAGE_BY_URI($uri: String) {

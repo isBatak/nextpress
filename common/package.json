@@ -1,8 +1,7 @@
 {
-  "name": "common",
+  "name": "@nextpress/common",
   "version": "1.0.0",
   "description": "\"Headles wordpress shared components\"",
-  "main": "index.js",
-  "files": ["./components"],
+  "main": "index.ts",
   "license": "MIT"
 }

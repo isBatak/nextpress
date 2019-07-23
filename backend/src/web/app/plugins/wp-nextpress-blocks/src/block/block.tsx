@@ -1,3 +1,5 @@
+import { ImageText } from '@nextpress/common';
+
 /**
  * BLOCK: nextpress-example
  *
@@ -15,7 +17,7 @@ registerBlockType('nextpress/block-example', {
   keywords: [__('nextpress-blocks — Example'), __('Example')],
 
   edit: function() {
-    return <div>test 2</div>;
+    return <ImageText />;
   },
 
   save: function() {

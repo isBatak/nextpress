@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "@nextpress/frontend",
   "version": "1.0.0",
   "scripts": {
     "dev": "NODE_EXTRA_CA_CERTS=../backend/certs/nextpress.local.crt next",
@@ -11,7 +11,7 @@
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
     "apollo-boost": "^0.4.3",
-    "common": "*",
+    "@nextpress/common": "1.0.0",
     "emotion-normalize": "^10.1.0",
     "graphql": "^14.4.2",
     "isomorphic-unfetch": "^3.0.0",
