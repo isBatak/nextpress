@@ -1,7 +1,5 @@
 /**
  * Build
- *
- * The create-guten-block CLI builds here.
  */
 
 'use strict';
