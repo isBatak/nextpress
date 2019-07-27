@@ -6,11 +6,11 @@ export interface ISnapCarouselProps {}
 const Container = styled.View`
   width: 100%;
   padding: 40px;
-  background-color: ${props => props.theme.backgroundColor};
+  background-color: ${(props: any) => props.theme.backgroundColor};
 `;
 
 const Box = styled.View`
-  background-color: ${props => props.theme.box.backgroundColor};
+  background-color: ${(props: any) => props.theme.box.backgroundColor};
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);

@@ -1,4 +1,4 @@
-import { SnapCarousel } from '@nextpress/common';
+import { SnapCarousel, themes } from '@nextpress/common';
 import { ThemeProvider } from 'emotion-theming';
 
 /**
@@ -10,14 +10,6 @@ import { ThemeProvider } from 'emotion-theming';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-
-const theme = {
-  color: 'hotpink',
-  backgroundColor: 'white',
-  box: {
-    backgroundColor: 'white',
-  },
-};
 
 registerBlockType('nextpress/snap-carousel', {
   title: __('Snap Carousel'),
@@ -36,7 +28,7 @@ registerBlockType('nextpress/snap-carousel', {
 
   edit: function() {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themes.light}>
         <SnapCarousel />
       </ThemeProvider>
     );

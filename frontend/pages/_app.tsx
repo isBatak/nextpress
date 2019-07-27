@@ -1,7 +1,10 @@
 import App, { Container } from 'next/app';
 import React from 'react';
-import withApolloClient from '../lib/with-apollo-client';
 import { ApolloProvider } from 'react-apollo';
+import { ThemeProvider } from 'emotion-theming';
+import { themes } from '@nextpress/common';
+
+import withApolloClient from '../lib/with-apollo-client';
 
 interface IMyAppProps {
   apolloClient: any;
@@ -13,7 +16,9 @@ class MyApp extends App<IMyAppProps> {
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
+          <ThemeProvider theme={themes.light}>
+            <Component {...pageProps} />
+          </ThemeProvider>
         </ApolloProvider>
       </Container>
     );
