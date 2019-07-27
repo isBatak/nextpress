@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NextPage } from 'next';
-import { ImageText } from '@nextpress/common';
+import { SnapCarousel } from '@nextpress/common';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Layout from '../components/Layout';
@@ -60,7 +60,7 @@ const homeQueryVars = { uri: 'home' };
 
 const IndexPage: NextPage = () => {
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <Layout title="Home | NextPress">
       <Query query={homeQuery} variables={homeQueryVars}>
         {({ loading, error, data }: any) => {
           if (error) return 'Error loading posts.';
@@ -69,8 +69,7 @@ const IndexPage: NextPage = () => {
           return <div>{JSON.stringify(data)}</div>;
         }}
       </Query>
-
-      <ImageText />
+      <SnapCarousel />
     </Layout>
   );
 };
