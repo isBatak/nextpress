@@ -1,26 +1,31 @@
 {
   "name": "@nextpress/native",
-  "main": "node_modules/expo/AppEntry.js",
+  "version": "1.0.0",
+  "main": "__generated__/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "postinstall": "expo-yarn-workspaces postinstall"
   },
   "dependencies": {
     "@emotion/primitives": "^10.0.14",
-    "expo": "^33.0.0",
-    "react": "16.8.3",
+    "@nextpress/common": "1.0.0",
+    "expo": "^34.0.1",
+    "expo-cli": "^3.0.4",
+    "global": "^4.4.0",
+    "react": "16.8.6",
     "react-dom": "^16.8.6",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
-    "react-native-web": "^0.11.4"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz"
   },
   "devDependencies": {
-    "@types/react": "^16.8.19",
-    "@types/react-native": "^0.57.60",
-    "babel-preset-expo": "^5.1.1",
-    "typescript": "^3.4.5"
+    "@types/react": "^16.8.23",
+    "@types/react-native": "^0.60.2",
+    "babel-preset-expo": "^5.2.0",
+    "expo-yarn-workspaces": "^1.2.0",
+    "typescript": "^3.5.3"
   },
   "private": true
 }

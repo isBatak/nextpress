@@ -1,19 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
-import styled from '@emotion/primitives';
-
-const Container = styled.View`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 50px;
-  border: 5px solid red;
-`;
+import { SnapCarousel } from '@nextpress/common';
 
 export default function App() {
-  return (
-    <Container>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </Container>
-  );
+  return <SnapCarousel />;
 }
