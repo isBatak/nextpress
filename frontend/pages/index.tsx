@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { NextPage } from 'next';
-import { SnapCarousel } from '@nextpress/common';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import dynamic from 'next/dynamic';
+
 import Layout from '../components/Layout';
 
 const homeQuery = gql`
@@ -15,40 +16,17 @@ const homeQuery = gql`
       uri
       blocks {
         __typename
-        ... on CoreHeadingBlock {
+        name
+        ... on NextpressSnapCarouselBlock {
           name
-          attributes {
-            __typename
-            ... on CoreHeadingBlockAttributes {
-              content
-              level
-            }
+          innerBlocks {
+            name
           }
-        }
-        ... on CoreParagraphBlock {
-          name
+          isValid
+          originalContent
           attributes {
             __typename
-            ... on CoreParagraphBlockAttributes {
-              backgroundColor
-              content
-            }
-            ... on CoreParagraphBlockAttributesV3 {
-              fontSize
-              content
-            }
-          }
-        }
-        ... on CoreQuoteBlock {
-          name
-          attributes {
-            __typename
-            ... on CoreQuoteBlockAttributes {
-              value
-              citation
-              align
-              className
-            }
+            className
           }
         }
       }
@@ -56,20 +34,21 @@ const homeQuery = gql`
   }
 `;
 
+// @ts-ignore
+const NextpressSnapCarouselBlock = dynamic(() => import('@nextpress/common').then(mod => mod.SnapCarousel));
+
 const homeQueryVars = { uri: 'home' };
 
 const IndexPage: NextPage = () => {
+  const { loading, data } = useQuery(homeQuery, { variables: homeQueryVars });
+
   return (
     <Layout title="Home | NextPress">
-      <Query query={homeQuery} variables={homeQueryVars}>
-        {({ loading, error, data }: any) => {
-          if (error) return 'Error loading posts.';
-          if (loading) return <div>Loading</div>;
-
-          return <div>{JSON.stringify(data)}</div>;
-        }}
-      </Query>
-      <SnapCarousel />
+      {loading
+        ? 'Loading'
+        : data.pageBy.blocks.map(
+            (block: any, index: number) => block.__typename === 'NextpressSnapCarouselBlock' && <NextpressSnapCarouselBlock key={index} />
+          )}
     </Layout>
   );
 };

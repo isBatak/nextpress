@@ -4,14 +4,14 @@ import fetch from 'isomorphic-unfetch';
 let apolloClient: ApolloClient<{}> | null = null;
 
 function create(initialState: any) {
-  const isBrowser = typeof window !== 'undefined';
+  const isServer = !process.browser;
   return new ApolloClient({
-    connectToDevTools: isBrowser,
-    ssrMode: !isBrowser,
+    connectToDevTools: !isServer,
+    ssrMode: isServer,
     link: new HttpLink({
       uri: 'https://nextpress.local/graphql',
-      // credentials: 'same-origin',
-      fetch: !isBrowser && (fetch as any),
+      credentials: 'same-origin',
+      fetch: isServer && (fetch as any),
     }),
     cache: new InMemoryCache().restore(initialState || {}),
   });

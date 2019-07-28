@@ -1,8 +1,11 @@
 export type Theme = typeof light;
 
+const colors = {
+  wildSand: '#f6f6f6',
+};
+
 export const light = {
-  color: 'hotpink',
-  backgroundColor: 'white',
+  colors,
   box: {
     backgroundColor: 'white',
   },

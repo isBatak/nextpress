@@ -3,12 +3,13 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { Global, css } from '@emotion/core';
 import emotionNormalize from 'emotion-normalize';
+import { withTheme } from 'emotion-theming';
 
-type Props = {
+interface ILayoutProps {
   title?: string;
-};
+}
 
-const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the default title' }) => (
+const Layout: React.FunctionComponent<ILayoutProps> = withTheme(({ children, title = 'This is the default title', theme }) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -33,13 +34,13 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
         body {
           padding: 0;
           margin: 0;
-          background: white;
+          background: ${theme.colors.wildSand};
           min-height: 100%;
           font-family: Helvetica, Arial, sans-serif;
         }
       `}
     />
   </div>
-);
+));
 
 export default Layout;
