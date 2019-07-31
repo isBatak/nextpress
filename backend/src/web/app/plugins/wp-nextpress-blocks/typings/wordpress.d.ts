@@ -27,7 +27,7 @@ interface WPBlockSettings {
    *
    * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
    */
-  edit(props: {}): React.ReactNode;
+  edit(props: { setAttributes(state: object): void }): React.ReactNode;
 
   /**
    * The save function defines the way in which the different attributes should be combined
@@ -64,6 +64,12 @@ interface WPBlocks {
 interface WP {
   i18n: WPI18n;
   blocks: WPBlocks;
+  editor: any;
+  components: {
+    PanelBody: React.ComponentType<{
+      title?: string;
+    }>;
+  };
 }
 
 declare var wp: WP;

@@ -9,6 +9,8 @@ import { ThemeProvider } from 'emotion-theming';
  */
 
 const { __ } = wp.i18n;
+const { InspectorControls } = wp.editor;
+const { PanelBody } = wp.components;
 const { registerBlockType } = wp.blocks;
 
 registerBlockType('nextpress/snap-carousel', {
@@ -26,10 +28,13 @@ registerBlockType('nextpress/snap-carousel', {
     align: false,
   },
 
-  edit: function() {
+  edit: function(): React.ReactNode {
     return (
       <ThemeProvider theme={themes.light}>
         <SnapCarousel />
+        <InspectorControls>
+          <PanelBody title="test">test</PanelBody>
+        </InspectorControls>
       </ThemeProvider>
     );
   },
