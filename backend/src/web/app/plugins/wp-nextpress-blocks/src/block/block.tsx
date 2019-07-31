@@ -1,17 +1,9 @@
 import { SnapCarousel, themes } from '@nextpress/common';
 import { ThemeProvider } from 'emotion-theming';
-
-/**
- * BLOCK: nextpress/example
- *
- * Registering a basic block with Gutenberg.
- * Simple block, renders and saves the same content without any interactivity.
- */
-
-const { __ } = wp.i18n;
-const { InspectorControls } = wp.editor;
-const { PanelBody } = wp.components;
-const { registerBlockType } = wp.blocks;
+import { __ } from '@wordpress/i18n';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, SelectControl } from '@wordpress/components';
+import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType('nextpress/snap-carousel', {
   title: __('Snap Carousel'),
@@ -25,15 +17,17 @@ registerBlockType('nextpress/snap-carousel', {
     },
   },
   supports: {
-    align: false,
+    align: true,
   },
 
-  edit: function(): React.ReactNode {
+  edit: function() {
     return (
       <ThemeProvider theme={themes.light}>
         <SnapCarousel />
         <InspectorControls>
-          <PanelBody title="test">test</PanelBody>
+          <PanelBody title="test">
+            <SelectControl options={[{ label: '1', value: '1' }]} value="1" onChange={t => console.log(t)} />
+          </PanelBody>
         </InspectorControls>
       </ThemeProvider>
     );
