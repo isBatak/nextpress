@@ -17,7 +17,7 @@ const homeQuery = gql`
       blocks {
         __typename
         name
-        ... on NextpressSnapCarouselBlock {
+        ... on NextpressSimplePostBlock {
           name
           innerBlocks {
             name
@@ -26,7 +26,9 @@ const homeQuery = gql`
           originalContent
           attributes {
             __typename
-            className
+            imageUrl
+            title
+            description
           }
         }
       }
@@ -39,7 +41,11 @@ const homeQueryVars = { uri: 'home' };
 const IndexPage: NextPage = () => {
   const { loading, data } = useQuery(homeQuery, { variables: homeQueryVars });
 
-  return <Layout title="Home | NextPress">{loading ? 'Loading' : <Blocks blocks={data.pageBy.blocks} />}</Layout>;
+  return (
+    <Layout title="Home | NextPress">
+      {loading ? 'Loading' : <Blocks blocks={data.pageBy.blocks} />}
+    </Layout>
+  );
 };
 
 export default IndexPage;

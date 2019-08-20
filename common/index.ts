@@ -1,2 +1,2 @@
-export { SnapCarousel } from './components/SnapCarousel';
+export { SimplePost } from './components/SimplePost';
 export { themes } from './styles/themes';

@@ -1,10 +1,13 @@
 import * as React from 'react';
 import dynamic from 'next/dynamic';
 
-const blocksDictionary: Record<string, React.ComponentType<{}>> = {
-  NexpressUnknownBlock: dynamic(() => import('./UnknownBlock').then(mod => mod.UnknownBlock)),
-  NextpressSnapCarouselBlock: dynamic(() => import('@nextpress/common').then(mod => mod.SnapCarousel)),
+const blocksDictionary: Record<string, React.ComponentType<any>> = {
+  NextpressSimplePostBlock: dynamic(() => import('@nextpress/common').then(mod => mod.SimplePost)),
 };
+
+const NexpressUnknownBlock: React.ComponentType<any> = dynamic(() =>
+  import('./UnknownBlock').then(mod => mod.UnknownBlock)
+);
 
 interface IBlocksProps {
   blocks: Array<any>;
@@ -13,7 +16,7 @@ interface IBlocksProps {
 export const Blocks: React.FunctionComponent<IBlocksProps> = ({ blocks }) =>
   // @ts-ignore
   blocks.map(({ __typename, attributes }, index: number) => {
-    const Block = blocksDictionary[__typename] || blocksDictionary.UnknownBlock;
+    const Block = blocksDictionary[__typename] || NexpressUnknownBlock;
 
     return <Block key={index} {...attributes} />;
   });

@@ -1,39 +1,100 @@
-import { SnapCarousel, themes } from '@nextpress/common';
+import { SimplePost, themes } from '@nextpress/common';
 import { ThemeProvider } from 'emotion-theming';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, SelectControl } from '@wordpress/components';
-import { registerBlockType } from '@wordpress/blocks';
+import {
+  InspectorControls,
+  RichText,
+  MediaUpload,
+  MediaUploadCheck,
+  MediaPlaceholder,
+} from '@wordpress/block-editor';
+import { PanelBody, TextControl, TextareaControl, Button } from '@wordpress/components';
+import { registerBlockType, BlockAlignment } from '@wordpress/blocks';
 
-registerBlockType('nextpress/snap-carousel', {
-  title: __('Snap Carousel'),
+interface ISnapCarouselAttributes {
+  align: BlockAlignment;
+  imageUrl: string;
+  title: string;
+  description: string;
+}
+
+registerBlockType<ISnapCarouselAttributes>('nextpress/simple-post', {
+  title: __('Simple Post'),
   icon: 'format-gallery',
   category: 'common',
-  keywords: [__('nextpress — Snap Carousel'), __('Snap Carousel')],
+  keywords: [__('nextpress — Simple Post'), __('Simple Post')],
   attributes: {
     align: {
       type: 'string',
       default: 'full',
+    },
+    imageUrl: {
+      type: 'string',
+    },
+    title: {
+      type: 'string',
+    },
+    description: {
+      type: 'string',
     },
   },
   supports: {
     align: true,
   },
 
-  edit: function() {
+  edit: ({ setAttributes, attributes }) => {
     return (
       <ThemeProvider theme={themes.light}>
-        <SnapCarousel />
+        <SimplePost
+          imageUrl={attributes.imageUrl}
+          title={
+            <RichText
+              value={attributes.title}
+              onChange={title => setAttributes({ title })}
+              placeholder={__('Enter title...')}
+              keepPlaceholderOnFocus={true}
+            />
+          }
+          description={
+            <RichText
+              value={attributes.description}
+              onChange={description => setAttributes({ description })}
+              placeholder={__('Enter description...')}
+              keepPlaceholderOnFocus={true}
+            />
+          }
+        />
         <InspectorControls>
-          <PanelBody title="test">
-            <SelectControl options={[{ label: '1', value: '1' }]} value="1" onChange={t => console.log(t)} />
+          <PanelBody title="Info">
+            <MediaUploadCheck>
+              {attributes.imageUrl && <img src={attributes.imageUrl} />}
+              <MediaUpload
+                onSelect={media => setAttributes({ imageUrl: media.url })}
+                allowedTypes={['image']}
+                render={({ open }) => (
+                  <Button isPrimary onClick={open}>
+                    {__('Open Media Library')}
+                  </Button>
+                )}
+              />
+            </MediaUploadCheck>
+            <TextControl
+              label="Title"
+              value={attributes.title}
+              onChange={title => setAttributes({ title })}
+            />
+            <TextareaControl
+              label="Description"
+              value={attributes.description}
+              onChange={description => setAttributes({ description })}
+            />
           </PanelBody>
         </InspectorControls>
       </ThemeProvider>
     );
   },
 
-  save: function() {
+  save() {
     return null;
   },
 });
