@@ -6,10 +6,16 @@
   "author": "Ivica Batinic",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "backend/src/web/app/plugins/wp-nextpress-blocks",
-    "frontend",
-    "common",
-    "native"
-  ]
+  "workspaces": {
+    "packages": [
+      "backend/src/web/app/plugins/wp-nextpress-blocks",
+      "frontend",
+      "common",
+      "native"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**"
+    ]
+  }
 }
