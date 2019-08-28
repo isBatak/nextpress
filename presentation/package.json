@@ -1,0 +1,16 @@
+{
+  "name": "@nextpress/presentation",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "mdx-deck slides.mdx",
+    "build": "mdx-deck build slides.mdx",
+    "help": "mdx-deck"
+  },
+  "devDependencies": {
+    "@mdx-deck/components": "^2.5.0",
+    "@mdx-deck/themes": "^3.0.8",
+    "mdx-deck": "^3.0.9",
+    "rebass": "^4.0.5"
+  }
+}
