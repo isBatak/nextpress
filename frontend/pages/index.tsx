@@ -26,6 +26,7 @@ const homeQuery = gql`
           originalContent
           attributes {
             __typename
+            className
             imageUrl
             title
             description
