@@ -32,9 +32,9 @@ const Description = styled.Text`
 `;
 
 export interface ISimplePostProps {
-  imageUrl: string;
-  title: React.ReactNode;
-  description: React.ReactNode;
+  imageUrl?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
 }
 
 export const SimplePost: React.FunctionComponent<ISimplePostProps> = ({
