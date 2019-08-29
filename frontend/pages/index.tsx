@@ -40,7 +40,7 @@ const homeQuery = gql`
 const homeQueryVars = { uri: 'home' };
 
 const IndexPage: NextPage = () => {
-  const { loading, data } = useQuery(homeQuery, { variables: homeQueryVars });
+  const { loading, data } = useQuery(homeQuery, { variables: homeQueryVars }); // pollInterval: 3000
 
   return (
     <Layout title="Home | NextPress">
