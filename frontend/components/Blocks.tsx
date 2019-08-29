@@ -19,8 +19,8 @@ export const Blocks: React.FunctionComponent<IBlocksProps> = ({ blocks }) =>
     const Block = blocksDictionary[__typename] || NexpressUnknownBlock;
 
     return (
-      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
-        <Block key={index} {...attributes} />
+      <div key={index} style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        <Block {...attributes} />
       </div>
     );
   });
