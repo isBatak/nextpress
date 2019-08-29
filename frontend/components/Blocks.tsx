@@ -18,5 +18,9 @@ export const Blocks: React.FunctionComponent<IBlocksProps> = ({ blocks }) =>
   blocks.map(({ __typename, attributes }, index: number) => {
     const Block = blocksDictionary[__typename] || NexpressUnknownBlock;
 
-    return <div style={{ maxWidth: '1024px', margin: '0 auto' }}><Block key={index} {...attributes} /></div>;
+    return (
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        <Block key={index} {...attributes} />
+      </div>
+    );
   });
