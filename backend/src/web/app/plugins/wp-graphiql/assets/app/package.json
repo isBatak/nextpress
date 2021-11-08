@@ -6,7 +6,7 @@
     "react-scripts": "^1.1.4"
   },
   "dependencies": {
-    "graphiql": "^0.11.11",
+    "graphiql": "^1.4.7",
     "graphql": "^0.13.2",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.4.1",
